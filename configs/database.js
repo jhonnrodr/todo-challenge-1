@@ -3,8 +3,7 @@ const mongoose = require('mongoose')
 
 const database = {
      connect() {
-        mongoose.connect('mongodb+srv://jhonn:musica@cluster0.9upig.mongodb.net/todo?retryWrites=true&w=majority',
-        { useNewUrlParser: true }, 
+        mongoose.connect(process.env.DB_CONNECTION, {useNewUrlParser: true }, 
         () => {
             console.log('Connected to database')
         })
