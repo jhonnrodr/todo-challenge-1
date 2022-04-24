@@ -1,15 +1,16 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const mongoose = require('mongoose')
+const morgan = require('morgan')
 require('dotenv').config()
 
 const app = express()
 const port = 3000
 
 app.use(express.json())
-app.use(bodyParser.json())
 app.use(cors())
+app.use(morgan('tiny'))
+app.use(bodyParser.json())
 
 const tasksRoutes = require('./routes/tasks')
 app.use('/tasks', tasksRoutes)
