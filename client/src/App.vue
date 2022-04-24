@@ -39,6 +39,11 @@
 
 <script>
 import axios from 'axios';
+if (process.env.NODE_ENV === 'production'){
+  axios.defaults.baseURL = '';
+} else {
+  axios.defaults.baseURL = 'api/';
+}
 export default {
   name: 'App',
   components: {
@@ -51,25 +56,25 @@ export default {
   },
   methods: {
     async getTasks() {
-      const response = await axios.get('api/tasks');
+      const response = await axios.get('tasks');
       this.items = response.data;
     },
     async addTask() {
-      const response = await axios.post('api/tasks', {
+      const response = await axios.post('tasks', {
         title: this.newItem
       });
       this.items.push(response.data);
       this.newItem = '';
     },
     async deleteTask(item) {
-      const response = await axios.delete(`api/tasks/${item}`);
+      const response = await axios.delete(`tasks/${item}`);
       if(response.status === 200) {
         this.items = this.items.filter(task => task._id !== item);
       }
     },
     async completeTask(item) {
      item.completed = !item.completed;
-      await axios.patch(`api/tasks/${item._id}`, {
+      await axios.patch(`tasks/${item._id}`, {
         completed: item.completed
       });
       
