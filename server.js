@@ -3,9 +3,8 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 require('dotenv').config()
-
+const { PORT } = require('./configs/config')
 const app = express()
-const port = 3000
 
 app.use(express.json())
 app.use(cors())
@@ -29,5 +28,5 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 
-app.listen(port, () => console.log("Server is running on port: " + port))
+app.listen(PORT, () => console.log("Server is running on port: " + PORT))
 
